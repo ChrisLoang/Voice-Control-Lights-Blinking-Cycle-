@@ -35,7 +35,8 @@ Discription of our project.
 
 // include the library code:
 #include <LiquidCrystal.h>
-#include <SoftwareSerial.h> 
+#include <SoftwareSerial.h>
+//optional libraries
 #include <Adafruit_NeoPixel.h>
 #include <CurieBLE.h>
 #define printJSON 1
@@ -106,7 +107,9 @@ void loop() {
 }
 
 //Possible needed functions. 
+
 //digitalWrite(A0, HIGH); or digitalWrite(A0, LOW); works as if they are digital pins.
+//This function is used in med range voice.
 void circular_pattern(){
   digitalWrite(Green_Light2, HIGH);
   digitalWrite(Orange_Light2, LOW);
@@ -153,8 +156,11 @@ void circular_pattern(){
   
 }
 void circular_pattern2(){}//optional if we use neopixal led.
+void disco_pattern(){}//similar to the wave and circular pattern just use both patterns together.
+void disco_pattern2(){}//optional if we use neopixal led.
 
 // all digital pins will be used in here. 
+//this function will be called for low range frequency of our voices.
 void wave_pattern(){
   digitalWrite(Green_Light, HIGH);
   digitalWrite(Orange_Light, LOW);
@@ -200,5 +206,5 @@ void wave_pattern(){
 
 }
 
-void button_switch_control(int bitbutton){}//similar to lab two. 
+void button_switch_control(int bitbutton){}//similar to lab two. You may use the wave pattern for this function.
 void voice_ledfrequency(int voice_recoded){} // still looking for how to do it for now work on the other three. 
