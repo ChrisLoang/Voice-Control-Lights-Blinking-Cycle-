@@ -51,7 +51,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
   int store_voice_frequency = 0;
 //call a variable for the button switch
 const int button_switch = 7;
-
+int button_count = 0;
 //setup has change please change it to fit neopixal led light. 
 void setup(){
   // set up the LCD's number of columns and rows and input:
