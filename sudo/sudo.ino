@@ -87,13 +87,16 @@ void loop() {
 }
 
 //Possible needed functions. 
-
+//Wave pattern
 void CircularWave(){}// ring rgb neopixal led.
 void DiscoWave(){}//call CirculWave and WaveCycle or create your won pattern.
 void WaveCycle(){}//rgb neopixel led light strips
+void RandomCycle(){} // optional if needed a 4th type of pattern.
 void BlinkCycle(int bitbutton){}//similar to lab two. You may use the wave pattern for this function.
+
+//Helper function. 
 void ReceivingVocieFromPhone(int voice_recoded){} // still looking for how to do it for now work on the other three. 
 void LCDText(){}// Display text for function we having and next functikon as suggestion.
 void HandleSting(){}// to handle the string received from voice command and will convert our voice to string.
 void loop(){}// will loop 
-void RandomCycle(){} // optional if needed a 4th type of pattern.
+
