@@ -99,4 +99,5 @@ void ReceivingVocieFromPhone(int voice_recoded){} // still looking for how to do
 void LCDText(){}// Display text for function we having and next functikon as suggestion.
 void HandleSting(){}// to handle the string received from voice command and will convert our voice to string.
 void loop(){}// will loop 
+void turn_off(){}// turns off all neopixel lights. 
 
