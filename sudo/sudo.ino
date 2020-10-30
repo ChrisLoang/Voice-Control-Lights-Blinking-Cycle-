@@ -43,7 +43,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 //call each digital led light that will be used in wave pattern, disco pattern and button switch.
 
-\
+
 
 //call each pin to the bluetooth adaptor
  
@@ -52,6 +52,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 //call a variable for the button switch
 const int button_switch = 7;
 
+//setup has change please change it to fit neopixal led light. 
 void setup(){
   // set up the LCD's number of columns and rows and input:
   lcd.begin(16, 2);
