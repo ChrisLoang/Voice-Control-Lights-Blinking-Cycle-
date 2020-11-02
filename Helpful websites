@@ -33,3 +33,6 @@ https://www.arduino.cc/en/Tutorial/Foundations/AnalogInputPins
 How to use RGB bulbs
 https://create.arduino.cc/projecthub/muhammad-aqib/arduino-rgb-led-tutorial-fc003e
 https://www.electronicshub.org/rgb-led-with-arduino/
+
+Guide on how to use Niopixel lights.
+https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use
