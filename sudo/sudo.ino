@@ -52,7 +52,18 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 //call each digital led light that will be used in wave pattern, disco pattern and button switch.
 
 // Declare our NeoPixel strip and ring objects:
+//wave
 Adafruit_NeoPixel wave_strip(wave_count, wave_pin, NEO_GRB + NEO_KHZ800);
+//what you see in the bellow is we are grouping 10 rgb led lights together and placing them 
+// all the same color. Therefore we will be needing 6 since we have 60 rgb led lights.
+uint32_t first_ten = wave_strip.color(255,0,255);//0 through 9
+uint32_t second_ten = wave_strip.color(255,255,0);// 10 through 19
+uint32_t third_ten = wave_strip.color(0,0,255); // 20 through 29
+uint32_t fourth_ten = wave_strip.color(0,255,0);// 30 through 39
+uint32_t fifth_ten = wave_strip.color(255,0,0);// 40 through 49
+uint32_t six_ten = wave_strip.color(198,100,200);//50 through 59
+
+//circular
 Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ800);
 
 //call each pin to the bluetooth adaptor
@@ -105,7 +116,20 @@ void loop() {
 //Wave pattern
 void CircularWave(){}// ring rgb neopixal led.
 void DiscoWave(){}//call CirculWave and WaveCycle or create your won pattern.
-void WaveCycle(){}//rgb neopixel led light strips
+void WaveCycle(){
+ wave_strip.fill(first_ten, 0, 9);
+ wave_strip.show();
+ strip.fill(second_ten, 10, 19);
+ wave_strip.show();
+ strip.fill(first_ten, 20, 29);
+ wave_strip.show();
+ strip.fill(first_ten, 30, 39);
+ wave_strip.show();
+ strip.fill(first_ten, 40, 49);
+ wave_strip.show();
+ strip.fill(first_ten, 50, 59);
+ wave_strip.show();
+}//rgb neopixel led light strips
 void RandomCycle(){} // optional if needed a 4th type of pattern.
 void BlinkCycle(int bitbutton){}//similar to lab two. You may use the wave pattern for this function.
 
