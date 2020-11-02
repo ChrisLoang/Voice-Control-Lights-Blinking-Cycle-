@@ -29,12 +29,20 @@ Discription of our project.
 // include the library code:
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
-//optional libraries
 #include <Adafruit_NeoPixel.h>
 #include <CurieBLE.h>
+
+//for wave pattern function.
+#define wave_pin 6
+#define wave_count 60
+
+//for circular pattern function.
+#define wave_pin 9
+#define wave_count 9
+
+//optional can be remove if not used.
 #define printJSON 1
 #define BLEenabled 1
-
 
 // initialize any needed LCD interface pin, bluethooth module pin, button switch, and LED. 
 // with the arduino pin number it is connected to
@@ -43,15 +51,20 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 //call each digital led light that will be used in wave pattern, disco pattern and button switch.
 
-
+// Declare our NeoPixel strip and ring objects:
+Adafruit_NeoPixel wave_strip(wave_count, wave_pin, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ800);
 
 //call each pin to the bluetooth adaptor
- 
  SoftwareSerial MyBlue(0, 1); // RX | TX
-  int store_voice_frequency = 0;
+ //must decided one if not try to see how it may work. 
+ Sting store_voice_string = "";
+ int store_voice_pitch = 0;
+
 //call a variable for the button switch
 const int button_switch = 7;
 int button_count = 0;
+
 //setup has change please change it to fit neopixal led light. 
 void setup(){
   // set up the LCD's number of columns and rows and input:
@@ -65,11 +78,13 @@ void setup(){
   
   // All outputs will be setup.
   //Circular and Disco LED lights 
-
+  circular_ring.begin();
+  circular_ring.show();// by default all pixels are "off".
   
   //Wave, Disco and Button switch
-
-  
+  wave_strip.begin();
+  wave_strip.show();// by default all pixels are "off".
+ 
   Serial.begin(9600);
 
   // Print a message that introduces the group(optional).
@@ -95,7 +110,7 @@ void RandomCycle(){} // optional if needed a 4th type of pattern.
 void BlinkCycle(int bitbutton){}//similar to lab two. You may use the wave pattern for this function.
 
 //Helper function. 
-void ReceivingVocieFromPhone(int voice_recoded){} // still looking for how to do it for now work on the other three. 
+void ReceivingVocieFromPhone(Sting voice_recoded){} // still looking for how to do it for now work on the other three. 
 void LCDText(){}// Display text for function we having and next functikon as suggestion.
 void HandleSting(){}// to handle the string received from voice command and will convert our voice to string.
 void loop(){}// will loop 
