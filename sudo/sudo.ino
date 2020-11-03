@@ -233,11 +233,30 @@ void RandomCycle(){
    }
   else{
     DiscoWave();
-  }
+  } 
+ button_count = 0;
 }
   
 //Helper function. 
+//this function is called when the switch button has been press. 
+void blinkWave(){
+//depending on the button_count determines which of the four wave pattern, circular pattern, disco pattern or random selection pattern will be activated. 
+ 
+ //Depending on the button_count, determines which one will be turn on. 
+   if (button_count == 1){
+    WaveCycle();
+    }
+  else if (button_count == 2){
+    CircularWave();
+   }
+  else if (button_count == 3){
+    DiscoWave();
+  }
+  else{
+  RandomCycle();
+  }
+}
 void ReceivingVocieFromPhone(String voice_recoded){} // still looking for how to do it for now work on the other three. 
-void LCDText(){}// Display text for function we having and next functikon as suggestion.
+void LCDText(){}// Display text for function we having and next functikon as suggestion
 void HandleString(){}// to handle the string received from voice command and will convert our voice to string.
 void turn_off(){}// turns off all neopixel lights. 
