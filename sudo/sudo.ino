@@ -1,5 +1,4 @@
-
-/*  Title of our project. 
+/*  Voice to Frequency to Switch LED light show. 
 
 Discription of our project.
 
@@ -30,19 +29,16 @@ Discription of our project.
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 #include <Adafruit_NeoPixel.h>
-#include <CurieBLE.h>
+
 
 //for wave pattern function.
 #define wave_pin 6
 #define wave_count 60
 
 //for circular pattern function.
-#define wave_pin 9
-#define wave_count 9
+#define circular_pin 9
+#define circular_count 94
 
-//optional can be remove if not used.
-#define printJSON 1
-#define BLEenabled 1
 
 // initialize any needed LCD interface pin, bluethooth module pin, button switch, and LED. 
 // with the arduino pin number it is connected to
@@ -56,12 +52,12 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 Adafruit_NeoPixel wave_strip(wave_count, wave_pin, NEO_GRB + NEO_KHZ800);
 //what you see in the bellow is we are grouping 10 rgb led lights together and placing them 
 // all the same color. Therefore we will be needing 6 since we have 60 rgb led lights.
-uint32_t first_ten = wave_strip.color(255,0,255);//0 through 9
-uint32_t second_ten = wave_strip.color(255,255,0);// 10 through 19
-uint32_t third_ten = wave_strip.color(0,0,255); // 20 through 29
-uint32_t fourth_ten = wave_strip.color(0,255,0);// 30 through 39
-uint32_t fifth_ten = wave_strip.color(255,0,0);// 40 through 49
-uint32_t six_ten = wave_strip.color(198,100,200);//50 through 59
+uint32_t first_ten = wave_strip.Color(255,0,255);//0 through 9
+uint32_t second_ten = wave_strip.Color(255,255,0);// 10 through 19
+uint32_t third_ten = wave_strip.Color(0,0,255); // 20 through 29
+uint32_t fourth_ten = wave_strip.Color(0,255,0);// 30 through 39
+uint32_t fifth_ten = wave_strip.Color(255,0,0);// 40 through 49
+uint32_t six_ten = wave_strip.Color(198,100,200);//50 through 59
 
 //circular
 Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ800);
@@ -69,7 +65,7 @@ Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ8
 //call each pin to the bluetooth adaptor
  SoftwareSerial MyBlue(0, 1); // RX | TX
  //must decided one if not try to see how it may work. 
- Sting store_voice_string = "";
+ String store_voice_string = "";
  int store_voice_pitch = 0;
 
 //call a variable for the button switch
@@ -105,7 +101,7 @@ void setup(){
 //loop is not done yet please continue working on it.
 void loop() {
   //seeing if the bluetooth is connected and if it worked use the store_voice_frequency in void voice_ledfrequency(int voice_recoded){}.
-  if (MyBlue.available()){store_voice_frequency = MyBlue.read();}
+ // if (MyBlue.available()){store_voice_frequency = MyBlue.read();}
 
   lcd.setCursor(0,1);
   
@@ -113,30 +109,40 @@ void loop() {
 }
 
 //Possible needed functions. 
-//Wave pattern
+//patterns
 void CircularWave(){}// ring rgb neopixal led.
 void DiscoWave(){}//call CirculWave and WaveCycle or create your won pattern.
+//rgb neopixel led light strips
 void WaveCycle(){
  wave_strip.fill(first_ten, 0, 9);
  wave_strip.show();
- strip.fill(second_ten, 10, 19);
+ wave_strip.fill(second_ten, 10, 19);
  wave_strip.show();
- strip.fill(first_ten, 20, 29);
+ wave_strip.fill(first_ten, 20, 29);
  wave_strip.show();
- strip.fill(first_ten, 30, 39);
+ wave_strip.fill(first_ten, 30, 39);
  wave_strip.show();
- strip.fill(first_ten, 40, 49);
+ wave_strip.fill(first_ten, 40, 49);
  wave_strip.show();
- strip.fill(first_ten, 50, 59);
+ wave_strip.fill(first_ten, 50, 59);
  wave_strip.show();
-}//rgb neopixel led light strips
+ wave_strip.fill(first_ten, 40, 49);
+ wave_strip.show();
+ wave_strip.fill(first_ten, 30, 39);
+ wave_strip.show();
+ wave_strip.fill(first_ten, 20, 29);
+ wave_strip.show();
+ wave_strip.fill(second_ten, 10, 19);
+ wave_strip.show();
+ wave_strip.fill(first_ten, 0, 9);
+ wave_strip.show();
+}
+
 void RandomCycle(){} // optional if needed a 4th type of pattern.
 void BlinkCycle(int bitbutton){}//similar to lab two. You may use the wave pattern for this function.
 
 //Helper function. 
-void ReceivingVocieFromPhone(Sting voice_recoded){} // still looking for how to do it for now work on the other three. 
+void ReceivingVocieFromPhone(String voice_recoded){} // still looking for how to do it for now work on the other three. 
 void LCDText(){}// Display text for function we having and next functikon as suggestion.
-void HandleSting(){}// to handle the string received from voice command and will convert our voice to string.
-void loop(){}// will loop 
+void HandleString(){}// to handle the string received from voice command and will convert our voice to string.
 void turn_off(){}// turns off all neopixel lights. 
-
