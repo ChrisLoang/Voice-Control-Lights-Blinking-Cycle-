@@ -1,4 +1,5 @@
-/*  Voice Control Lights Blinking Cycle. 
+
+/*   Voice Control Lights Blinking Cycle.
 
 Discription of our project.
 We will have an Android emulator on Windows or Mac to connect to bluetooth with a HC - 05 bluetooth sensor module 
@@ -51,8 +52,6 @@ LEDs that you can input. We will also have a button or a switch, that you can ma
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-//call each digital led light that will be used in wave pattern, disco pattern and button switch.
-
 // Declare our NeoPixel strip and ring objects:
 //wave
 Adafruit_NeoPixel wave_strip(wave_count, wave_pin, NEO_GRB + NEO_KHZ800);
@@ -67,6 +66,12 @@ uint32_t six_ten = wave_strip.Color(198,100,200);//50 through 59
 
 //circular
 Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ800);
+// all the same color. Therefore we will be needing 6 since we have 60 rgb led lights.
+uint32_t first_ring = circular_ring.Color(255,0,255);//0 through 31
+uint32_t second_ring = circular_ring.Color(255,255,0);// 32 through 55 
+uint32_t third_ring = circular_ring.Color(0,0,255); //  56 through 71
+uint32_t fourth_ring = circular_ring.Color(0,255,0);//  72 through 83 
+uint32_t fifth_ring = circular_ring.Color(255,0,0);//  84 through 92
 
 //call each pin to the bluetooth adaptor
  SoftwareSerial MyBlue(0, 1); // RX | TX
@@ -77,8 +82,9 @@ Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ8
 //call a variable for the button switch
 const int button_switch = 7;
 int button_count = 0;
+long random_number = 0;
 
-//setup has change please change it to fit neopixal led light. 
+//setup has change to fit neopixal led light. 
 void setup(){
   // set up the LCD's number of columns and rows and input:
   lcd.begin(16, 2);
@@ -100,6 +106,7 @@ void setup(){
  
   Serial.begin(9600);
 
+  randomSeed(analogRead(0));
   // Print a message that introduces the group(optional).
   lcd.print("");
 }
@@ -111,32 +118,99 @@ void loop() {
 
   lcd.setCursor(0,1);
   
-  delay(500);//delay can be modified
+  delay(1000);//delay can be modified
 }
 
 //Possible needed functions. 
 //patterns
-void CircularWave(){}// ring rgb neopixal led.
-void DiscoWave(){}//call CirculWave and WaveCycle or create your won pattern.
+// ring rgb neopixal led.
+void CircularWave(){
+ circular_ring.fill(first_ring, 0, 31);
+ circular_ring.show();
+ circular_ring.fill(second_ring, 32, 55);
+ circular_ring.show();
+ circular_ring.fill(third_ring, 56, 71);
+ circular_ring.show();
+ circular_ring.fill(fourth_ring, 72, 83);
+ circular_ring.show();
+ circular_ring.fill(fifth_ring, 84, 92);
+ circular_ring.show();
+ circular_ring.fill(fourth_ring, 72, 83);
+ circular_ring.show();
+ circular_ring.fill(third_ring, 56, 71);
+ circular_ring.show();
+ circular_ring.fill(second_ring, 32, 55);
+ circular_ring.show();
+ circular_ring.fill(first_ring, 0, 21);
+ circular_ring.show();
+}
+//call CirculWave and WaveCycle or create your won pattern.
+void DiscoWave(){
+  circular_ring.fill(first_ring, 0, 31);
+  circular_ring.show();
+  wave_strip.fill(first_ten, 0, 9);
+  wave_strip.show();
+  circular_ring.fill(second_ring, 32, 55);
+  circular_ring.show();
+  wave_strip.fill(second_ten, 10, 19);
+  wave_strip.show();
+  circular_ring.fill(third_ring, 56, 71);
+  circular_ring.show();
+  wave_strip.fill(third_ten, 20, 29);
+  wave_strip.show();
+  circular_ring.fill(fourth_ring, 72, 83);
+  circular_ring.show();
+  wave_strip.fill(fourth_ten, 30, 39);
+  wave_strip.show();
+  circular_ring.fill(fifth_ring, 84, 92);
+  circular_ring.show();
+  wave_strip.fill(fifth_ten, 40, 49);
+  wave_strip.show();
+  circular_ring.fill(fifth_ring, 84, 92);
+  circular_ring.show();
+  wave_strip.fill(six_ten, 50, 59);
+  wave_strip.show();
+  circular_ring.fill(fifth_ring, 84, 92);
+  circular_ring.show();
+  wave_strip.fill(fifth_ten, 40, 49);
+  wave_strip.show();
+  circular_ring.fill(fourth_ring, 72, 83);
+  circular_ring.show();
+  wave_strip.fill(fourth_ten, 30, 39);
+  wave_strip.show();
+  circular_ring.fill(third_ring, 56, 71);
+  circular_ring.show();
+  wave_strip.fill(third_ten, 20, 29);
+  wave_strip.show();
+  circular_ring.fill(second_ring, 32, 55);
+  circular_ring.show();
+  wave_strip.fill(second_ten, 10, 19);
+  wave_strip.show();
+  circular_ring.fill(first_ring, 0, 31);
+  circular_ring.show();
+  wave_strip.fill(first_ten, 0, 9);
+  wave_strip.show();
+  
+  }
 //rgb neopixel led light strips
 void WaveCycle(){
  wave_strip.fill(first_ten, 0, 9);
  wave_strip.show();
  wave_strip.fill(second_ten, 10, 19);
  wave_strip.show();
- wave_strip.fill(first_ten, 20, 29);
+ wave_strip.fill(third_ten, 20, 29);
  wave_strip.show();
- wave_strip.fill(first_ten, 30, 39);
+ wave_strip.fill(fourth_ten, 30, 39);
  wave_strip.show();
- wave_strip.fill(first_ten, 40, 49);
+ wave_strip.fill(fifth_ten, 40, 49);
  wave_strip.show();
- wave_strip.fill(first_ten, 50, 59);
+ wave_strip.fill(six_ten, 50, 59);
  wave_strip.show();
- wave_strip.fill(first_ten, 40, 49);
+ wave_strip.fill(fifth_ten, 40, 49);
  wave_strip.show();
- wave_strip.fill(first_ten, 30, 39);
+ wave_strip.fill(fourth_ten, 30, 39);
  wave_strip.show();
- wave_strip.fill(first_ten, 20, 29);
+ wave_strip.fill(third_ten, 20, 29);
  wave_strip.show();
  wave_strip.fill(second_ten, 10, 19);
  wave_strip.show();
@@ -144,9 +218,24 @@ void WaveCycle(){
  wave_strip.show();
 }
 
-void RandomCycle(){} // optional if needed a 4th type of pattern.
-void BlinkCycle(int bitbutton){}//similar to lab two. You may use the wave pattern for this function.
-
+//if the switch button selects this function then
+//let the button_count be randomly selected to choose one of the three pattern.
+void RandomCycle(){
+ 
+  button_count = random(3);// will select a number between 0 through 2.
+  
+  // figuring out which one to turn on. 
+  if (button_count == 1){
+    WaveCycle();
+    }
+  else if (button_count == 2){
+    CircularWave();
+   }
+  else{
+    DiscoWave();
+  }
+}
+  
 //Helper function. 
 void ReceivingVocieFromPhone(String voice_recoded){} // still looking for how to do it for now work on the other three. 
 void LCDText(){}// Display text for function we having and next functikon as suggestion.
