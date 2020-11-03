@@ -115,9 +115,10 @@ void setup(){
 void loop() {
   //seeing if the bluetooth is connected and if it worked use the store_voice_frequency in void voice_ledfrequency(int voice_recoded){}.
  // if (MyBlue.available()){store_voice_frequency = MyBlue.read();}
-
   lcd.setCursor(0,1);
-  
+  //if and else if statements must be added here so that the lcd display knows what to print. 
+  lcd.print("Switch button has the power to ");
+  lcd.print("Voice frequency detected and will power up ");
   delay(1000);//delay can be modified
 }
 
@@ -221,17 +222,20 @@ void WaveCycle(){
 //if the switch button selects this function then
 //let the button_count be randomly selected to choose one of the three pattern.
 void RandomCycle(){
- 
+ lcd.print("Random decides to select ");
   button_count = random(3);// will select a number between 0 through 2.
   
   // figuring out which one to turn on. 
   if (button_count == 1){
+    lcd.print("Wave pattern.");
     WaveCycle();
     }
   else if (button_count == 2){
+    lcd.print("Circular pattern.");
     CircularWave();
    }
   else{
+    lcd.print("Disco pattern.");
     DiscoWave();
   } 
  button_count = 0;
@@ -244,19 +248,23 @@ void blinkWave(){
  
  //Depending on the button_count, determines which one will be turn on. 
    if (button_count == 1){
-    WaveCycle();
+   lcd.print(" turn on Wave pattern."); 
+   WaveCycle();
     }
   else if (button_count == 2){
+    lcd.print(" turn on Circular pattern."); 
     CircularWave();
    }
   else if (button_count == 3){
-    DiscoWave();
+    lcd.print(" turn on Disco pattern."); 
+    DiscoWave(); 
   }
   else{
-  RandomCycle();
+    lcd.print(" give random a chance to select which one will turn on."); 
+    RandomCycle();
   }
 }
-void ReceivingVocieFromPhone(String voice_recoded){} // still looking for how to do it for now work on the other three. 
-void LCDText(){}// Display text for function we having and next functikon as suggestion
-void HandleString(){}// to handle the string received from voice command and will convert our voice to string.
+// still looking for how to do it for now work on the other three.
+void ReceivingVocieFromPhone(int voice_recoded){}  
+
 void turn_off(){}// turns off all neopixel lights. 
