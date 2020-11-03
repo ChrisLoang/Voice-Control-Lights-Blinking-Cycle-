@@ -1,7 +1,13 @@
-/*  Voice to Frequency to Switch LED light show. 
+/*  Voice Control Lights Blinking Cycle. 
 
 Discription of our project.
-
+We will have an Android emulator on Windows or Mac to connect to bluetooth with a HC - 05 bluetooth sensor module 
+to enable voice recognition. We will have a Serial port from Arduino, and perform serial readStrings to get the string from the serial port,
+and that will be our input for the project. Our input will be an input to command LEDs functionality, we will have NeoPixels and use our NeoPixels LEDs to display disco,
+wave functionality, also changing the colors. To display disco functionality, we will have it blink multiple in random, and for a wave functionality, we will flash the first led,
+follow with a second one, and along the strip of the neopixel leds. At the same time, we will have an LCD display that displays current information 
+about the NeoPixels functionality that is being used, and for the second row of the LCD, we will show suggestions for the alternative functionality of the 
+LEDs that you can input. We will also have a button or a switch, that you can manually change the LEDs functionalities rather than have your voices as input.
  
  The circuit:
  * LCD RS pin to digital pin 12
