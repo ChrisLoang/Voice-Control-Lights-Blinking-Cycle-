@@ -71,7 +71,8 @@ uint32_t first_ring = circular_ring.Color(255,0,255);//0 through 31
 uint32_t second_ring = circular_ring.Color(255,255,0);// 32 through 55 
 uint32_t third_ring = circular_ring.Color(0,0,255); //  56 through 71
 uint32_t fourth_ring = circular_ring.Color(0,255,0);//  72 through 83 
-uint32_t fifth_ring = circular_ring.Color(255,0,0);//  84 through 92
+uint32_t fifth_ring = circular_ring.Color(255,0,0);//  84 through 91
+uint32_t six_ring = circular_ring.Color(198,100,200);//  92 through 92
 
 //call each pin to the bluetooth adaptor
  SoftwareSerial MyBlue(0, 1); // RX | TX
@@ -134,7 +135,11 @@ void CircularWave(){
  circular_ring.show();
  circular_ring.fill(fourth_ring, 72, 83);
  circular_ring.show();
- circular_ring.fill(fifth_ring, 84, 92);
+ circular_ring.fill(fifth_ring, 84, 91);
+ circular_ring.show();
+ circular_ring.fill(six_ring, 92, 92);
+ circular_ring.show();
+ circular_ring.fill(fifth_ring, 84, 91);
  circular_ring.show();
  circular_ring.fill(fourth_ring, 72, 83);
  circular_ring.show();
@@ -144,6 +149,7 @@ void CircularWave(){
  circular_ring.show();
  circular_ring.fill(first_ring, 0, 21);
  circular_ring.show();
+
 }
 //call CirculWave and WaveCycle or create your won pattern.
 void DiscoWave(){
@@ -167,11 +173,11 @@ void DiscoWave(){
   circular_ring.show();
   wave_strip.fill(fifth_ten, 40, 49);
   wave_strip.show();
-  circular_ring.fill(fifth_ring, 84, 92);
+  circular_ring.fill(six_ring, 92, 92);
   circular_ring.show();
   wave_strip.fill(six_ten, 50, 59);
   wave_strip.show();
-  circular_ring.fill(fifth_ring, 84, 92);
+  circular_ring.fill(fifth_ring, 84, 91);
   circular_ring.show();
   wave_strip.fill(fifth_ten, 40, 49);
   wave_strip.show();
