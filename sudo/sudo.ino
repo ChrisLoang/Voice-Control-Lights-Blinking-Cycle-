@@ -78,7 +78,7 @@ uint32_t six_ring = circular_ring.Color(198,100,200);//  92 through 92
  SoftwareSerial MyBlue(0, 1); // RX | TX
  //must decided one if not try to see how it may work. 
  String store_voice_string = "";
- int store_voice_pitch = 0;
+ int store_voice_frequency = 0;
 
 //call a variable for the button switch
 const int button_switch = 7;
@@ -115,11 +115,19 @@ void setup(){
 //loop is not done yet please continue working on it.
 void loop() {
   //seeing if the bluetooth is connected and if it worked use the store_voice_frequency in void voice_ledfrequency(int voice_recoded){}.
- // if (MyBlue.available()){store_voice_frequency = MyBlue.read();}
+  if (MyBlue.available()){
+    store_voice_frequency = MyBlue.read();
+    lcd.print("Voice frequency detected and will power up ");
+    ReceivingVocieFromPhone(store_voice_frequency);
+    }
+  else{
+    lcd.print("Switch button has the power to ");
+    blinkWave();
+    } 
   lcd.setCursor(0,1);
   //if and else if statements must be added here so that the lcd display knows what to print. 
-  lcd.print("Switch button has the power to ");
-  lcd.print("Voice frequency detected and will power up ");
+  
+  
   delay(1000);//delay can be modified
 }
 
