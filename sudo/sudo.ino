@@ -131,6 +131,7 @@ void loop() {
   else{
     lcd.print("Switch button has the power to ");
     blinkWave();
+    switchLEDs();
     } 
   lcd.setCursor(0,1);
   //if and else if statements must be added here so that the lcd display knows what to print. 
@@ -393,6 +394,19 @@ void CircularWave2(){
   wave_strip.show();
   
   }
+
+
+//Alternative Button function
+void switchLEDs()
+{
+	lcd.print(“Turn on the wave pattern”);
+	lcd.setCursor(0,1)
+	Scrolling function(“Alternative functions are: Turn on Circular pattern”);
+ button = digitalRead(button_switch);
+
+ if(button == HIGH){WaveCycle();}
+}
+
 
 // still looking for how to do it for now work on the other three.
 void ReceivingVocieFromPhone(int voice_recoded){}  
