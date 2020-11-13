@@ -57,12 +57,20 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 Adafruit_NeoPixel wave_strip(wave_count, wave_pin, NEO_GRB + NEO_KHZ800);
 //what you see in the bellow is we are grouping 10 rgb led lights together and placing them 
 // all the same color. Therefore we will be needing 6 since we have 60 rgb led lights.
-uint32_t first_ten = wave_strip.Color(255,0,255);//0 through 9
-uint32_t second_ten = wave_strip.Color(255,255,0);// 10 through 19
-uint32_t third_ten = wave_strip.Color(0,0,255); // 20 through 29
-uint32_t fourth_ten = wave_strip.Color(0,255,0);// 30 through 39
-uint32_t fifth_ten = wave_strip.Color(255,0,0);// 40 through 49
-uint32_t six_ten = wave_strip.Color(198,100,200);//50 through 59
+uint32_t first_ten = wave_strip.Color(255,0,255);//0 through 9 or 0 through 4
+uint32_t second_ten = wave_strip.Color(255,255,0);// 10 through 19 or 5 through 9
+uint32_t third_ten = wave_strip.Color(0,0,255); // 20 through 29 or 10 through 14
+uint32_t fourth_ten = wave_strip.Color(0,255,0);// 30 through 39 or 15 through 19
+uint32_t fifth_ten = wave_strip.Color(255,0,0);// 40 through 49 or 20 through 24
+uint32_t six_ten = wave_strip.Color(198,100,200);//50 through 59 or 25 through 29
+
+//second group of RGB 30 led lights Circular 
+uint32_t seven_ten = wave_strip.Color(255,0,255);//30 through 34. 
+uint32_t eight_ten = wave_strip.Color(255,255,0);// 35 through 39. 
+uint32_t nine_ten = wave_strip.Color(0,0,255); // 40 through 44.
+uint32_t ten_ten = wave_strip.Color(0,255,0);// 45 through 49.
+uint32_t eleven_ten = wave_strip.Color(255,0,0);// 50 through 54.
+uint32_t tweleve_ten = wave_strip.Color(198,100,200);//54 through 59.
 
 //circular
 Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ800);
@@ -243,14 +251,17 @@ void RandomCycle(){
   if (button_count == 1){
     lcd.print("Wave pattern.");
     WaveCycle();
+    WaveCycle2();
     }
   else if (button_count == 2){
     lcd.print("Circular pattern.");
     CircularWave();
+    CircularWave2();
    }
   else{
     lcd.print("Disco pattern.");
     DiscoWave();
+    DiscoWave2();
   } 
  button_count = 0;
 }
@@ -278,6 +289,111 @@ void blinkWave(){
     RandomCycle();
   }
 }
+
+//In the even we decide to use only the RGB 60 LED lights we must use these three functions.
+//Spliting the RGB 60 LED lights into two groups.
+void WaveCycle2(){
+ wave_strip.fill(first_ten, 0, 4);
+ wave_strip.show();
+ wave_strip.fill(second_ten, 5, 9);
+ wave_strip.show();
+ wave_strip.fill(third_ten, 10, 14);
+ wave_strip.show();
+ wave_strip.fill(fourth_ten, 15, 19);
+ wave_strip.show();
+ wave_strip.fill(fifth_ten, 20, 24);
+ wave_strip.show();
+ wave_strip.fill(six_ten, 25, 29);
+ wave_strip.show();
+ wave_strip.fill(fifth_ten, 20, 24);
+ wave_strip.show();
+ wave_strip.fill(fourth_ten, 15, 19);
+ wave_strip.show();
+ wave_strip.fill(third_ten, 10, 14);
+ wave_strip.show();
+ wave_strip.fill(second_ten, 5, 9);
+ wave_strip.show();
+ wave_strip.fill(first_ten, 0, 4);
+ wave_strip.show();
+
+}
+
+// RGB 30 LED lights second group  
+void CircularWave2(){
+ wave_strip.fill(seven_ten, 30, 34);
+ wave_strip.show();
+ wave_strip.fill(eight_ten, 35, 39);
+ wave_strip.show();
+ wave_strip.fill(nine_ten, 40,44 );
+ wave_strip.show();
+ wave_strip.fill(ten_ten, 45, 49);
+ wave_strip.show();
+ wave_strip.fill(eleven_ten, 50, 54);
+ wave_strip.show();
+ wave_strip.fill(twelve_ten, 55, 59);
+ wave_strip.show();
+ wave_strip.fill(eleven_ten, 50, 54);
+ wave_strip.show();
+ wave_strip.fill(ten_ten, 45, 49);
+ wave_strip.show();
+ wave_strip.fill(nine_ten, 40, 44);
+ wave_strip.show();
+ wave_strip.fill(eight_ten, 35, 39);
+ wave_strip.show();
+ wave_strip.fill(seven_ten, 30, 34);
+ wave_strip.show();
+
+}
+
+//combining the RGB 60 LED strip together
+ void DiscoWave2(){
+  wave_strip.fill(seven_ten,30 , 34);
+  wave_strip.show();
+  wave_strip.fill(first_ten, 0, 4);
+  wave_strip.show();
+  wave_strip.fill(eight_ten, 35, 39);
+  wave_strip.show();
+  wave_strip.fill(second_strip, 5, 9);
+  wave_strip.show();
+  wave_strip.fill(nine_ten, 40, 44);
+  wave_strip.show();
+  wave_strip.fill(third_ten,10 ,14 );
+  wave_strip.show();
+  wave_strip.fill(ten_ten, 45, 49);
+  wave_strip.show();
+  wave_strip.fill(fourth_ten, 15 ,19);
+  wave_strip.show();
+  wave_strip.fill(eleven_ten,50 ,54);
+  wave_strip.show();
+  wave_strip.fill(fifth_ten, 20, 24);
+  wave_strip.show();
+  wave_strip.fill(twelve_ten, 55, 59);
+  circular_ring.show();
+  wave_strip.fill(six_ten, 50, 59);
+  wave_strip.show();
+  wave_strip.fill(eleven_ten,50 ,54);
+  wave_strip.show();
+  wave_strip.fill(fifth_ten, 20, 24);
+  wave_strip.show();
+  wave_strip.fill(ten_ten, 45, 49);
+  wave_strip.show();
+  wave_strip.fill(fourth_ten, 15 ,19);
+  wave_strip.show();
+  wave_strip.fill(nine_ten, 40, 44);
+  wave_strip.show();
+  wave_strip.fill(third_ten,10 ,14 );
+  wave_strip.show();
+  wave_strip.fill(eight_ten, 35, 39);
+  wave_strip.show();
+  wave_strip.fill(second_strip, 5, 9);
+  wave_strip.show();
+  wave_strip.fill(seven_ten,30 , 34);
+  wave_strip.show();
+  wave_strip.fill(first_ten, 0, 4);
+  wave_strip.show();
+  
+  }
+
 // still looking for how to do it for now work on the other three.
 void ReceivingVocieFromPhone(int voice_recoded){}  
 
