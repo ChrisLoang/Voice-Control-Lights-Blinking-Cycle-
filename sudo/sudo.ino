@@ -123,8 +123,8 @@ void setup(){
 //loop is not done yet please continue working on it.
 void loop() {
   //seeing if the bluetooth is connected and if it worked use the store_voice_frequency in void voice_ledfrequency(int voice_recoded){}.
-  if (MyBlue.available()){
     store_voice_frequency = MyBlue.read();
+    if (MyBlue.available()){
     lcd.print("Voice frequency detected and will power up ");
     ReceivingVocieFromPhone(store_voice_frequency);
     }
