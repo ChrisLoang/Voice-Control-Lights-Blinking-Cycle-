@@ -21,9 +21,10 @@ LEDs that you can input. We will also have a button or a switch, that you can ma
  * 10K resistor:
  * ends to +5V and ground
  * wiper to LCD VO pin (pin 3)
- * Bluetooth RXD pin to digital pin RX/D0
- * Bluetooth TXD pin to digital pin TX/D1
- * Bluetooth VCC pin tO Analog  pin 5V
+ * Bluetooth RXD pin to  Arduino digital pin RX/D0
+ * Bluetooth TXD pin to  Arduino digital pin TX/D1
+ * Bluetooth VCC pin to Arduino Analog  pin 5V
+ * Bluetooth GND pin to Arduino Analog pin GRN
  * Potentioment 100K 
  * 220 resistor:
  *This pins will connet a circular ring and strip colors will be used with the wave and button switch.
@@ -51,6 +52,9 @@ LEDs that you can input. We will also have a button or a switch, that you can ma
 // with the arduino pin number it is connected to
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
+//bluetooth adaptor
+SoftwareSerial MyBlue(0,1);//RX,TX
 
 // Declare our NeoPixel strip and ring objects:
 //wave
