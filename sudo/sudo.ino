@@ -76,21 +76,12 @@ uint32_t ten_ten = wave_strip.Color(0,255,0);// 45 through 49.
 uint32_t eleven_ten = wave_strip.Color(255,0,0);// 50 through 54.
 uint32_t tweleve_ten = wave_strip.Color(198,100,200);//54 through 59.
 
-//circular
-Adafruit_NeoPixel circular_ring(circular_count, circular_pin, NEO_GRB + NEO_KHZ800);
-// all the same color. Therefore we will be needing 6 since we have 60 rgb led lights.
-uint32_t first_ring = circular_ring.Color(255,0,255);//0 through 31
-uint32_t second_ring = circular_ring.Color(255,255,0);// 32 through 55 
-uint32_t third_ring = circular_ring.Color(0,0,255); //  56 through 71
-uint32_t fourth_ring = circular_ring.Color(0,255,0);//  72 through 83 
-uint32_t fifth_ring = circular_ring.Color(255,0,0);//  84 through 91
-uint32_t six_ring = circular_ring.Color(198,100,200);//  92 through 92
 
 //call each pin to the bluetooth adaptor
- SoftwareSerial MyBlue(0, 1); // RX | TX
+ 
  //must decided one if not try to see how it may work. 
  String store_voice_string = "";
- int store_voice_frequency = 0;
+ 
 
 //call a variable for the button switch
 const int button_switch = 7;
@@ -102,16 +93,11 @@ void setup(){
   // set up the LCD's number of columns and rows and input:
   lcd.begin(16, 2);
   
-  // All inputs will be setup.
-  MyBlue.begin(9600);
   
   //Button Switch:
   pinMode(button_switch, INPUT);
   
   // All outputs will be setup.
-  //Circular and Disco LED lights 
-  circular_ring.begin();
-  circular_ring.show();// by default all pixels are "off".
   
   //Wave, Disco and Button switch
   wave_strip.begin();
@@ -127,15 +113,20 @@ void setup(){
 //loop is not done yet please continue working on it.
 void loop() {
   //seeing if the bluetooth is connected and if it worked use the store_voice_frequency in void voice_ledfrequency(int voice_recoded){}.
-    store_voice_frequency = MyBlue.read();
-    if (MyBlue.available()){
-    lcd.print("Voice frequency detected and will power up ");
-    ReceivingVocieFromPhone(store_voice_frequency);
+if(Serial.availble()){  
+	while (Serial.available()){
+		delay(10);
+		char c = Serial.read();
+		if (c == '#'){break;}
+		store_voice_frequency += c; // shorthand for voice = voice + c
+	}
+	lcd.print("Voice frequency detected and will power up ");
+	lcd.print(ReceivingVocieFromPhone(store_voice_frequency(store_voice_frequency));
     }
-  else{
-    lcd.print("Switch button has the power to ");
-    blinkWave();
-    switchLEDs();
+else{
+    	lcd.print("Switch button has the power to ");
+    	blinkWave();
+    	switchLEDs();
     } 
   lcd.setCursor(0,1);
   //if and else if statements must be added here so that the lcd display knows what to print. 
@@ -145,107 +136,6 @@ void loop() {
 }
 
 //Possible needed functions. 
-//patterns
-// ring rgb neopixal led.
-void CircularWave(){
- circular_ring.fill(first_ring, 0, 31);
- circular_ring.show();
- circular_ring.fill(second_ring, 32, 55);
- circular_ring.show();
- circular_ring.fill(third_ring, 56, 71);
- circular_ring.show();
- circular_ring.fill(fourth_ring, 72, 83);
- circular_ring.show();
- circular_ring.fill(fifth_ring, 84, 91);
- circular_ring.show();
- circular_ring.fill(six_ring, 92, 92);
- circular_ring.show();
- circular_ring.fill(fifth_ring, 84, 91);
- circular_ring.show();
- circular_ring.fill(fourth_ring, 72, 83);
- circular_ring.show();
- circular_ring.fill(third_ring, 56, 71);
- circular_ring.show();
- circular_ring.fill(second_ring, 32, 55);
- circular_ring.show();
- circular_ring.fill(first_ring, 0, 21);
- circular_ring.show();
-
-}
-//call CirculWave and WaveCycle or create your won pattern.
-void DiscoWave(){
-  circular_ring.fill(first_ring, 0, 31);
-  circular_ring.show();
-  wave_strip.fill(first_ten, 0, 9);
-  wave_strip.show();
-  circular_ring.fill(second_ring, 32, 55);
-  circular_ring.show();
-  wave_strip.fill(second_ten, 10, 19);
-  wave_strip.show();
-  circular_ring.fill(third_ring, 56, 71);
-  circular_ring.show();
-  wave_strip.fill(third_ten, 20, 29);
-  wave_strip.show();
-  circular_ring.fill(fourth_ring, 72, 83);
-  circular_ring.show();
-  wave_strip.fill(fourth_ten, 30, 39);
-  wave_strip.show();
-  circular_ring.fill(fifth_ring, 84, 92);
-  circular_ring.show();
-  wave_strip.fill(fifth_ten, 40, 49);
-  wave_strip.show();
-  circular_ring.fill(six_ring, 92, 92);
-  circular_ring.show();
-  wave_strip.fill(six_ten, 50, 59);
-  wave_strip.show();
-  circular_ring.fill(fifth_ring, 84, 91);
-  circular_ring.show();
-  wave_strip.fill(fifth_ten, 40, 49);
-  wave_strip.show();
-  circular_ring.fill(fourth_ring, 72, 83);
-  circular_ring.show();
-  wave_strip.fill(fourth_ten, 30, 39);
-  wave_strip.show();
-  circular_ring.fill(third_ring, 56, 71);
-  circular_ring.show();
-  wave_strip.fill(third_ten, 20, 29);
-  wave_strip.show();
-  circular_ring.fill(second_ring, 32, 55);
-  circular_ring.show();
-  wave_strip.fill(second_ten, 10, 19);
-  wave_strip.show();
-  circular_ring.fill(first_ring, 0, 31);
-  circular_ring.show();
-  wave_strip.fill(first_ten, 0, 9);
-  wave_strip.show();
-  
-  }
-//rgb neopixel led light strips
-void WaveCycle(){
- wave_strip.fill(first_ten, 0, 9);
- wave_strip.show();
- wave_strip.fill(second_ten, 10, 19);
- wave_strip.show();
- wave_strip.fill(third_ten, 20, 29);
- wave_strip.show();
- wave_strip.fill(fourth_ten, 30, 39);
- wave_strip.show();
- wave_strip.fill(fifth_ten, 40, 49);
- wave_strip.show();
- wave_strip.fill(six_ten, 50, 59);
- wave_strip.show();
- wave_strip.fill(fifth_ten, 40, 49);
- wave_strip.show();
- wave_strip.fill(fourth_ten, 30, 39);
- wave_strip.show();
- wave_strip.fill(third_ten, 20, 29);
- wave_strip.show();
- wave_strip.fill(second_ten, 10, 19);
- wave_strip.show();
- wave_strip.fill(first_ten, 0, 9);
- wave_strip.show();
-}
-
 //if the switch button selects this function then
 //let the button_count be randomly selected to choose one of the three pattern.
 void RandomCycle(){
@@ -256,17 +146,14 @@ void RandomCycle(){
   if (button_count == 1){
     lcd.print("Wave pattern.");
     WaveCycle();
-    WaveCycle2();
     }
   else if (button_count == 2){
     lcd.print("Circular pattern.");
     CircularWave();
-    CircularWave2();
    }
   else{
     lcd.print("Disco pattern.");
     DiscoWave();
-    DiscoWave2();
   } 
  button_count = 0;
 }
@@ -297,7 +184,7 @@ void blinkWave(){
 
 //In the even we decide to use only the RGB 60 LED lights we must use these three functions.
 //Spliting the RGB 60 LED lights into two groups.
-void WaveCycle2(){
+void WaveCycle(){
  wave_strip.fill(first_ten, 0, 4);
  wave_strip.show();
  wave_strip.fill(second_ten, 5, 9);
@@ -324,7 +211,7 @@ void WaveCycle2(){
 }
 
 // RGB 30 LED lights second group  
-void CircularWave2(){
+void CircularWave(){
  wave_strip.fill(seven_ten, 30, 34);
  wave_strip.show();
  wave_strip.fill(eight_ten, 35, 39);
@@ -351,7 +238,7 @@ void CircularWave2(){
 }
 
 //combining the RGB 60 LED strip together
- void DiscoWave2(){
+ void DiscoWave(){
   wave_strip.fill(seven_ten,30 , 34);
   wave_strip.show();
   wave_strip.fill(first_ten, 0, 4);
@@ -398,8 +285,6 @@ void CircularWave2(){
   wave_strip.show();
   
   }
-
-
 //Alternative Button function
 void switchLEDs()
 {
@@ -413,6 +298,23 @@ void switchLEDs()
 
 
 // still looking for how to do it for now work on the other three.
-void ReceivingVocieFromPhone(int voice_recoded){}  
+void ReceivingVocieFromPhone(int voice_recoded){
+	//this will turn on the wave pattern on. 
+	if (store_voice_frequency == "*turn on wave"){
+		WaveCycle();
+		return "wave on!";
+	}
+	//this will turn on the circular pattern on.
+  	else if (store_voice_frequency == "*turn on circular"){
+		CircularWave();
+		return "circular on!";
+	}
+	//this will activate the disco pattern.
+  	else if (store_voice_frequency == "*turn on both"){
+		DiscoWave();
+		return "Disco on!";
+	}
+  	return "not a command try again.";
+}  
 
 void turn_off(){}// turns off all neopixel lights. 
