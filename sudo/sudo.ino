@@ -37,24 +37,22 @@ LEDs that you can input. We will also have a button or a switch, that you can ma
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 #include <Adafruit_NeoPixel.h>
-
+#include <FastLED.H>
 
 //for wave pattern function.
 #define wave_pin 6
 #define wave_count 60
+#define color__combination GRB
+#define chip WS2812B
+#define Bright 200
+#define Frame 60
 
-//for circular pattern function.
-#define circular_pin 9
-#define circular_count 94
 
 
 // initialize any needed LCD interface pin, bluethooth module pin, button switch, and LED. 
 // with the arduino pin number it is connected to
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
-
-//bluetooth adaptor
-SoftwareSerial MyBlue(0,1);//RX,TX
 
 // Declare our NeoPixel strip and ring objects:
 //wave
@@ -76,10 +74,15 @@ uint32_t ten_ten = wave_strip.Color(0,255,0);// 45 through 49.
 uint32_t eleven_ten = wave_strip.Color(255,0,0);// 50 through 54.
 uint32_t tweleve_ten = wave_strip.Color(198,100,200);//54 through 59.
 
+//used for oppiste direction
+bool direction = false;
+
+//CRGB coding from Danial Garcia the creator of the library Fast
+CRGB leds(wave_count);
+CRGBPalettel6 dynamp;
 
 //call each pin to the bluetooth adaptor
- 
- //must decided one if not try to see how it may work. 
+//must decided one if not try to see how it may work. 
  String store_voice_string = "";
  
 
@@ -92,11 +95,11 @@ long random_number = 0;
 void setup(){
   // set up the LCD's number of columns and rows and input:
   lcd.begin(16, 2);
-  
-  
+;
+  dynamp = HeatColors_p;
   //Button Switch:
   pinMode(button_switch, INPUT);
-  
+
   // All outputs will be setup.
   
   //Wave, Disco and Button switch
