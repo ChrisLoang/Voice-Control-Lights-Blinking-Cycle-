@@ -39,15 +39,13 @@ LEDs that you can input. We will also have a button or a switch, that you can ma
 #include <Adafruit_NeoPixel.h>
 #include <FastLED.H>
 
-//for wave pattern function.
+//RGB 60 led strip.
 #define wave_pin 6
 #define wave_count 60
 #define color__combination GRB
 #define chip WS2812B
 #define Bright 200
 #define Frame 60
-
-
 
 // initialize any needed LCD interface pin, bluethooth module pin, button switch, and LED. 
 // with the arduino pin number it is connected to
@@ -73,13 +71,6 @@ uint32_t nine_ten = wave_strip.Color(0,0,255); // 40 through 44.
 uint32_t ten_ten = wave_strip.Color(0,255,0);// 45 through 49.
 uint32_t eleven_ten = wave_strip.Color(255,0,0);// 50 through 54.
 uint32_t tweleve_ten = wave_strip.Color(198,100,200);//54 through 59.
-
-//used for oppiste direction
-bool direction = false;
-
-//CRGB coding from Danial Garcia the creator of the library Fast
-CRGB leds(wave_count);
-CRGBPalettel6 dynamp;
 
 //call each pin to the bluetooth adaptor
 //must decided one if not try to see how it may work. 
@@ -110,7 +101,7 @@ void setup(){
 
   randomSeed(analogRead(0));
   // Print a message that introduces the group(optional).
-  lcd.print("");
+  lcd.print("Welcome to Voice Control Lights Blinking Cycle.");
 }
 
 //loop is not done yet please continue working on it.
@@ -319,5 +310,3 @@ void ReceivingVocieFromPhone(int voice_recoded){
 	}
   	return "not a command try again.";
 }  
-
-void turn_off(){}// turns off all neopixel lights. 
