@@ -106,7 +106,8 @@ void setup(){
 
 //loop is not done yet please continue working on it.
 void loop() {
-  //seeing if the bluetooth is connected and if it worked use the store_voice_frequency in void voice_ledfrequency(int voice_recoded){}.
+
+//seeing if the bluetooth is connected and if it worked use the store_voice_frequency in void voice_ledfrequency(int voice_recoded){}.
 if(Serial.availble()){  
 	while (Serial.available()){
 		delay(10);
@@ -115,16 +116,15 @@ if(Serial.availble()){
 		store_voice_frequency += c; // shorthand for voice = voice + c
 	}
 	lcd.print("Voice frequency detected and will power up ");
-	lcd.print(ReceivingVocieFromPhone(store_voice_frequency(store_voice_frequency));
+	lcd.setCursor(0,1);
+	ReceivingVocieFromPhone(store_voice_frequency(store_voice_frequency);
     }
 else{
     	lcd.print("Switch button has the power to ");
-    	blinkWave();
+    	lcd.setCursor(0,1);
+	blinkWave();
     	switchLEDs();
     } 
-  lcd.setCursor(0,1);
-  //if and else if statements must be added here so that the lcd display knows what to print. 
-  
   
   delay(1000);//delay can be modified
 }
@@ -133,7 +133,7 @@ else{
 //if the switch button selects this function then
 //let the button_count be randomly selected to choose one of the three pattern.
 void RandomCycle(){
- lcd.print("Random decides to select ");
+ lcd.print("Random selects ");
   button_count = random(3);// will select a number between 0 through 2.
   
   // figuring out which one to turn on. 
@@ -294,19 +294,25 @@ void switchLEDs()
 // still looking for how to do it for now work on the other three.
 void ReceivingVocieFromPhone(int voice_recoded){
 	//this will turn on the wave pattern on. 
-	if (store_voice_frequency == "*turn on wave"){
+	if (store_voice_frequency == "*turn on Wave"|| store_voice_frequency == "*Turn on wave" || store_voice_frequency == "*turn on wave" || store_voice_frequency == "*Turn on Wave"){
 		WaveCycle();
-		return "wave on!";
+		lcd.print(" Wave pattern!");
 	}
 	//this will turn on the circular pattern on.
-  	else if (store_voice_frequency == "*turn on circular"){
+  	else if(store_voice_frequency == "*Turn on circular" || store_voice_frequency == "*turn on Circular" || store_voice_frequency == "*Turn on Circular" || store_voice_frequency == "*turn on circular"){
 		CircularWave();
-		return "circular on!";
+		lcd.print(" Circular pattern!");
 	}
 	//this will activate the disco pattern.
-  	else if (store_voice_frequency == "*turn on both"){
+  	else if(store_voice_frequency == "turn on Disco" || store_voice_frequency == "turn on disco" || store_voice_frequency == "Turn on Disco" || store_voice_frequency == "Turn on Disco"){
 		DiscoWave();
-		return "Disco on!";
+		lcd.print(" Disco pattern!");
 	}
-  	return "not a command try again.";
+	//this will activate a random pattern.
+	else if(store_voice_frequency == "turn on Disco" || store_voice_frequency == "turn on disco" || store_voice_frequency == "Turn on Disco" || store_voice_frequency == "Turn on Disco"){
+		 
+		lcd.print(" a random pattern! ");
+		RandomCycle();
+	}
+  	lcd.print(" not a command try again.");
 }  
