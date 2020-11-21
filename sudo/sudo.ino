@@ -119,6 +119,8 @@ void setup(){
 //loop is not done yet please continue working on it.
 void loop() {
 
+ int readButton = digitalRead(button_switch);
+ 
 //seeing if the bluetooth is connected and if it worked use the store_voice_string in void voice_ledfrequency(int voice_recoded){}.
 if(Serial.available ()){  
   while (Serial.available()){
@@ -131,14 +133,15 @@ if(Serial.available ()){
   ReceivingVocieFromPhone(store_voice_string);
   lcd.print(move_left(comblue()));
     }
-else{
-      
+else if (readButton == HIGH){
+      readButton = LOW;
+      button_count++;
       lcd.setCursor(0,1);
       blinkWave();
       switchLEDs();
       lcd.print(move_left(comswitch()));
     } 
-  
+   
   delay(1000);//delay can be modified
 }
 
