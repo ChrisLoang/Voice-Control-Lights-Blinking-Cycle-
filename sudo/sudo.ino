@@ -1,5 +1,12 @@
+/*
+Voice Control Lights Blinking Cycle.
+Created by:
+Chris Loang, tloang2, UIN needed
+Jay Patel, jpate245. UIN needed
+Sergio Covarrubias, scova2, UIN needed
 
-/*   Voice Control Lights Blinking Cycle.
+Link to a demo of our project:
+
 
 Discription of our project.
 We will have an Android emulator on Windows or Mac to connect to bluetooth with a HC - 05 bluetooth sensor module 
@@ -11,26 +18,33 @@ information about the NeoPixels functionality that is being used, and for the se
 LEDs that you can input. We will also have a button or a switch, that you can manually change the LEDs functionalities rather than have your voices as input.
  
  The circuit:
- * LCD RS pin to digital pin 12
- * LCD Enable pin to digital pin 11
- * LCD D4 pin to digital pin 5
- * LCD D5 pin to digital pin 4
- * LCD D6 pin to digital pin 3
- * LCD D7 pin to digital pin 2
- * LCD R/W pin to ground
- * 10K resistor:
+ * LCD RS pin to Arduino digital pin 12
+ * LCD Enable pin to Arduino digital pin 11
+ * LCD D4 pin to Arduino digital pin 5
+ * LCD D5 pin to Arduino digital pin 4
+ * LCD D6 pin to Arduino digital pin 3
+ * LCD D7 pin to Arduino digital pin 2
+ * LCD R/W pin to Arduino Anolog pin GND
+ * 10K resistor
  * ends to +5V and ground
  * wiper to LCD VO pin (pin 3)
+ 
  * Bluetooth RXD pin to  Arduino digital pin RX/D0
  * Bluetooth TXD pin to  Arduino digital pin TX/D1
  * Bluetooth VCC pin to Arduino Analog  pin 5V
- * Bluetooth GND pin to Arduino Analog pin GRN
+ * Bluetooth GND pin to Arduino Analog pin GND
  * Potentioment 100K 
  * 220 resistor:
- *This pins will connet a circular ring and strip colors will be used with the wave and button switch.
+ 
+ *RGB 60 LED light ground pin to Arduino Anolog GND
+ *RGB 60 LED light power pin to Arduino Anolog 5v
+ *RGB 60 LED light pin connector to Arduino digital pin 6
+ *RGB 60 LED external(RED) power cable to power adaptor 5v port
+ *RGB 60 LED external(WHITE) GND cable to power adaptor GND port
+ 
  *Switch button pin to digital pin 7
- * 220 resistor:
- * Ground connection
+ *Switch button pin ground to Arduino Anolog GND
+ *Switch button 220 resistor to Arduino Anolog 5v
 */
 
 // include the library code:
