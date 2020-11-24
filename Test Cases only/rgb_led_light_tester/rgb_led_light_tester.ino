@@ -2,6 +2,9 @@
  
  * Discription:
   * The purpose of ths is project is to test out the RGB LED light ring and strip. 
+  * The next statement will be important PLEASE READ IT!!!
+  * DO NOT PLACE THE 5V CONNECTER FOR THE ARDUNIO. SEE IF IT WORKS WITH THE 5V VOLTS IN THE 
+  * PLUG FIRST.
   
   *Circuit:
     *RGB 93 LED light Ring
@@ -12,12 +15,14 @@
       *RGB 93 LED light strip red ocrd goes to Arduino Anolog pin 5V.
       *RGB 93 LED light strip black ocrd goes to Arduino Anolog pin GRD.
       *RGB 93 LED light strip power pin goes to Arduino Anolog pin
+      
  */
 
 // include the library code:
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 #include <Adafruit_NeoPixel.h>
+#include <FastLED.h>
 
 //for wave pattern function.
 #define wave_pin 6
@@ -78,15 +83,18 @@ void loop() {
   // Calling up the functions to test the RGB LED ring and strip. 
   // you may test them seperate by using // to one of the functions 
   //by the way to test them both together all you need is disco funtion you do not need all three. 
-  DiscoWave(); 
-  CircularWave();
-  WaveCycle();
+//  DiscoWave(); 
+//  CircularWave();
+//  WaveCycle();
   
   //only used if we are using the RGB 60 LED light for both wave and circular.
-  DiscoWave2(); 
-  CircularWave2();
-  WaveCycle2();
-  
+//  DiscoWave2(); 
+//  CircularWave2();
+//  WaveCycle2();
+
+  //only use if you want to test all 60 LED light.
+  DiscoWave3();
+  delay(1000);
 }
 
 //Spliting the RGB 60 LED lights into two groups.
@@ -128,7 +136,7 @@ void CircularWave2(){
  wave_strip.show();
  wave_strip.fill(eleven_ten, 50, 54);
  wave_strip.show();
- wave_strip.fill(twelve_ten, 55, 59);
+ wave_strip.fill(tweleve_ten, 55, 59);
  wave_strip.show();
  wave_strip.fill(eleven_ten, 50, 54);
  wave_strip.show();
@@ -151,7 +159,7 @@ void CircularWave2(){
   wave_strip.show();
   wave_strip.fill(eight_ten, 35, 39);
   wave_strip.show();
-  wave_strip.fill(second_strip, 5, 9);
+  wave_strip.fill(second_ten, 5, 9);
   wave_strip.show();
   wave_strip.fill(nine_ten, 40, 44);
   wave_strip.show();
@@ -165,7 +173,7 @@ void CircularWave2(){
   wave_strip.show();
   wave_strip.fill(fifth_ten, 20, 24);
   wave_strip.show();
-  wave_strip.fill(twelve_ten, 55, 59);
+  wave_strip.fill(tweleve_ten, 55, 59);
   circular_ring.show();
   wave_strip.fill(six_ten, 50, 59);
   wave_strip.show();
@@ -183,7 +191,7 @@ void CircularWave2(){
   wave_strip.show();
   wave_strip.fill(eight_ten, 35, 39);
   wave_strip.show();
-  wave_strip.fill(second_strip, 5, 9);
+  wave_strip.fill(second_ten, 5, 9);
   wave_strip.show();
   wave_strip.fill(seven_ten,30 , 34);
   wave_strip.show();
@@ -191,6 +199,8 @@ void CircularWave2(){
   wave_strip.show();
   
   }
+
+  //ring and strip------------------------------------------------
 
 //RGB 60 LED light Strip light up.
 void WaveCycle(){
@@ -218,6 +228,8 @@ void WaveCycle(){
  wave_strip.show();
 
 }
+
+
 
 // RGB 60 LED Light ring  
 void CircularWave(){
@@ -294,3 +306,53 @@ void CircularWave(){
   wave_strip.show();
   
   }
+//---------------light------------------------12--------
+//combining the RGB 60 LED strip together
+ void DiscoWave3(){
+  wave_strip.fill(seven_ten,0 , 59);
+  wave_strip.show();
+  wave_strip.fill(first_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(eight_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(second_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(nine_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(third_ten,0 ,59 );
+  wave_strip.show();
+  wave_strip.fill(ten_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(fourth_ten, 0 ,59);
+  wave_strip.show();
+  wave_strip.fill(eleven_ten,0 ,59);
+  wave_strip.show();
+  wave_strip.fill(fifth_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(tweleve_ten, 0, 59);
+  circular_ring.show();
+  wave_strip.fill(six_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(eleven_ten,0 ,59);
+  wave_strip.show();
+  wave_strip.fill(fifth_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(ten_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(fourth_ten, 0 ,59);
+  wave_strip.show();
+  wave_strip.fill(nine_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(third_ten,0 ,59 );
+  wave_strip.show();
+  wave_strip.fill(eight_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(second_ten, 0, 59);
+  wave_strip.show();
+  wave_strip.fill(seven_ten,0 , 59);
+  wave_strip.show();
+  wave_strip.fill(first_ten, 0, 59);
+  wave_strip.show();
+  
+  }
+  
