@@ -71,20 +71,20 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 Adafruit_NeoPixel wave_strip(wave_count, wave_pin, NEO_GRB + NEO_KHZ800);
 //what you see in the bellow is we are grouping 10 rgb led lights together and placing them 
 // all the same color. Therefore we will be needing 6 since we have 60 rgb led lights.
-uint32_t first_ten = wave_strip.Color(255,0,255);//0 through 9 or 0 through 4
-uint32_t second_ten = wave_strip.Color(255,255,0);// 10 through 19 or 5 through 9
-uint32_t third_ten = wave_strip.Color(0,0,255); // 20 through 29 or 10 through 14
-uint32_t fourth_ten = wave_strip.Color(0,255,0);// 30 through 39 or 15 through 19
-uint32_t fifth_ten = wave_strip.Color(255,0,0);// 40 through 49 or 20 through 24
-uint32_t six_ten = wave_strip.Color(198,100,200);//50 through 59 or 25 through 29
-
+uint32_t first_ten = wave_strip.Color(255,0,255);//0 through 9 or 0 through 4 color Magenta 
+uint32_t second_ten = wave_strip.Color(199,255,218);// 10 through 19 or 5 through 9. color light green
+uint32_t third_ten = wave_strip.Color(255,245,199); // 20 through 29 or 10 through 14.color cyan
+uint32_t fourth_ten = wave_strip.Color(255,255,255);// 30 through 39 or 15 through 19. color white
+uint32_t fifth_ten = wave_strip.Color(255,0,0);// 40 through 49 or 20 through 24. color red
+uint32_t six_ten = wave_strip.Color(198,100,200);//50 through 59 or 25 through 29.color light purple
+Color(153,255,51)
 //second group of RGB 30 led lights Circular 
-uint32_t seven_ten = wave_strip.Color(255,0,255);//30 through 34. 
-uint32_t eight_ten = wave_strip.Color(255,255,0);// 35 through 39. 
-uint32_t nine_ten = wave_strip.Color(0,0,255); // 40 through 44.
-uint32_t ten_ten = wave_strip.Color(0,255,0);// 45 through 49.
-uint32_t eleven_ten = wave_strip.Color(255,0,0);// 50 through 54.
-uint32_t tweleve_ten = wave_strip.Color(198,100,200);//54 through 59.
+uint32_t seven_ten = wave_strip.Color(153,255,51);//30 through 34 color lime green. 
+uint32_t eight_ten = wave_strip.Color(192,192,192);// 35 through 39 color Gray
+uint32_t nine_ten = wave_strip.Color(0,0,255); // 40 through 44. color blue
+uint32_t ten_ten = wave_strip.Color(0,0,0);// 45 through 49. color black
+uint32_t eleven_ten = wave_strip.Color(245,240,250);// 50 through 54. color #F5F0FA
+uint32_t tweleve_ten = wave_strip.Color(255,128,0);//54 through 59. color orange 
 
 //call each pin to the bluetooth adaptor 
  String store_voice_string = "";
