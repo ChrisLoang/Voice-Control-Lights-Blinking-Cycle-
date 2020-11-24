@@ -77,7 +77,7 @@ uint32_t third_ten = wave_strip.Color(255,245,199); // 20 through 29 or 10 throu
 uint32_t fourth_ten = wave_strip.Color(255,255,255);// 30 through 39 or 15 through 19. color white
 uint32_t fifth_ten = wave_strip.Color(255,0,0);// 40 through 49 or 20 through 24. color red
 uint32_t six_ten = wave_strip.Color(198,100,200);//50 through 59 or 25 through 29.color light purple
-Color(153,255,51)
+
 //second group of RGB 30 led lights Circular 
 uint32_t seven_ten = wave_strip.Color(153,255,51);//30 through 34 color lime green. 
 uint32_t eight_ten = wave_strip.Color(192,192,192);// 35 through 39 color Gray
