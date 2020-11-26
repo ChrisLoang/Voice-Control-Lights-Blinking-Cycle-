@@ -144,6 +144,7 @@ if(Serial.available ()){
     store_voice_string += c; // shorthand for voice = voice + c
   }
   lcd.setCursor(0,1);
+  store_voice_string.toLowerCase();
   ReceivingVocieFromPhone(store_voice_string);
   lcd.print(move_left(comblue()));
     }
@@ -152,8 +153,8 @@ else if (readButton == HIGH){
       button_count++;
       lcd.setCursor(0,1);
       blinkWave();
-      switchLEDs();
       lcd.print(move_left(comswitch()));
+      
     } 
    
   delay(1000);//delay can be modified
@@ -207,36 +208,26 @@ void blinkWave(){
   }
 }
 
-//Alternative Button function
-void switchLEDs()
-{
-//  lcd.print("Turn on Wave pattern!");
-//  lcd.setCursor(0,1)
-////  Scrolling function(“Alternative functions are: Turn on Circular pattern”);
-// int button = digitalRead(button_switch);
-//
-// if(button == HIGH){WaveCycle();}
-}
 
 // Depending on our command issued and the frequency of our voice either one of the four WaveCycle(), CiccularCycle(), DiscoCycle() or RandomCycle(), will be called. 
 void ReceivingVocieFromPhone(String voice_recoded){
   //this will turn on the wave pattern on. 
-  if (store_voice_string == "*turn on Wave"|| store_voice_string == "*Turn on wave" || store_voice_string == "*turn on wave" || store_voice_string == "*Turn on Wave"){
+  if (store_voice_string == "*turn on wave"){
     WaveCycle();
     ba1 = " Wave pattern!";
   }
   //this will turn on the circular pattern on.
-    else if(store_voice_string == "*Turn on circular" || store_voice_string == "*turn on Circular" || store_voice_string == "*Turn on Circular" || store_voice_string == "*turn on circular"){
+    else if(store_voice_string == "*turn on circular"){
     CircularWave();
     ba1 = " Circular pattern!";
   }
   //this will activate the disco pattern.
-    else if(store_voice_string == "turn on Disco" || store_voice_string == "turn on disco" || store_voice_string == "Turn on Disco" || store_voice_string == "Turn on Disco"){
+    else if(store_voice_string == "turn on disco"){
     DiscoWave();
     ba1 = " Disco pattern!";
   }
   //this will activate a random pattern.
-  else if(store_voice_string == "turn on Disco" || store_voice_string == "turn on disco" || store_voice_string == "Turn on Disco" || store_voice_string == "Turn on Disco"){
+  else if(store_voice_string == "turn on random"){
      
     ba1 = " a random pattern! ";
     RandomCycle();
