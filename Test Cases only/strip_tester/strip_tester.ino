@@ -5,9 +5,9 @@
 Link to a demo of the Nepixel Light Strip:
 
 Discription of our projec.
-This will help you test if the strip is working properly. 
+This will help you test your strip if it works properly. 
 Be advice what you see here will be on our actual coding.
-Also, thought out the test you will see Green Red Blue instead 
+Also, through out the test you will see Green Red Blue instead 
 of Red Green Blue. That is normal because the Ardunio changes 
 the order in Red Green Blue to Green Red Blue. 
 
