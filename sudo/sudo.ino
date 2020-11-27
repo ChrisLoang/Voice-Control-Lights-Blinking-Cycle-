@@ -59,7 +59,9 @@ LEDs that you can input. We will also have a button or a switch, that you can ma
 #define color__combination GRB
 #define chip WS2812B
 #define Bright 200
-#define Frame 60
+#define Frames_per_second 60
+
+CRGB leds[wave_count];// used to turn on a random lights 
 
 // initialize any needed LCD interface pin, bluethooth module pin, button switch, and LED. 
 // with the arduino pin number it is connected to
@@ -89,6 +91,7 @@ uint32_t tweleve_ten = wave_strip.Color(255,128,0);//54 through 59. color orange
 //call each pin to the bluetooth adaptor 
  String store_voice_string = "";
 
+ 
 //used for button switch strings that will be combine and be able to print out one string in the lcd.print instead of mutiple print outs:
 String bl1 = "";
 
@@ -108,14 +111,25 @@ const int button_switch = 7;
 int button_count = 0;
 long random_number = 0;
 
+//this will help change the led lights to different color pallete
+CRGBPalette16 gPal;
+
 //setup has change to fit neopixal led light. 
 void setup(){
   // set up the LCD's number of columns and rows and input:
   lcd.begin(16, 2);
-;
- // dynamp = HeatColors_p;
+
+ // setting up the random colors for Disco pattern
+  delay(3000); // sanity delay
+  FastLED.addLeds<chip, wave_pin, color__combination>(leds, wave_count).setCorrection( TypicalLEDStrip );
+  FastLED.setBrightness( Bright );
+  gPal = HeatColors_p;
+   
   //Button Switch:
   pinMode(button_switch, INPUT);
+
+  //setting up the coloration for wave pattern and circular pattern
+  FastLED.addLeds<NEOPIXEL, wave_pin>(leds, wave_count);
 
   // All outputs will be setup.
   
@@ -144,7 +158,7 @@ if(Serial.available ()){
     store_voice_string += c; // shorthand for voice = voice + c
   }
   lcd.setCursor(0,1);
-  store_voice_string.toLowerCase();
+  store_voice_string.toLowerCase();//makes the entire string have lower case character.
   ReceivingVocieFromPhone(store_voice_string);
   lcd.print(move_left(comblue()));
     }
@@ -153,8 +167,8 @@ else if (readButton == HIGH){
       button_count++;
       lcd.setCursor(0,1);
       blinkWave();
-      lcd.print(move_left(comswitch()));
       
+      lcd.print(move_left(comswitch()));
     } 
    
   delay(1000);//delay can be modified
@@ -214,11 +228,13 @@ void ReceivingVocieFromPhone(String voice_recoded){
   //this will turn on the wave pattern on. 
   if (store_voice_string == "*turn on wave"){
     WaveCycle();
+    WaveCycle2();
     ba1 = " Wave pattern!";
   }
   //this will turn on the circular pattern on.
     else if(store_voice_string == "*turn on circular"){
     CircularWave();
+    CircularWave2();
     ba1 = " Circular pattern!";
   }
   //this will activate the disco pattern.
@@ -284,6 +300,76 @@ String move_left(String personal){
 //Strip activiation functions:
 //In the even we decide to use only the RGB 60 LED lights we must use these three functions.
 //Spliting the RGB 60 LED lights into two groups.
+// code is part of Mark Kriegsman Multiple controller examples. 
+
+//the Mirroring method has been used in both the WaveCycle2() and CircularWave2().
+//second attempts
+void WaveCycle2(){
+  for(int i = 0; i < 30; i++) {
+    // set our current dot to red
+    leds[i] = CRGB((153+i),(255-i),(51+i));
+    FastLED.show();
+    // clear our current dot before we move on
+    leds[i] = CRGB::Black;
+    delay(1000);
+  }
+}
+
+  //second attempts of the Circular wave 
+  void CircularWave2(){
+    for(int i = 30; i < 60; i = i + 5) {
+    // set our current dot to red
+    leds[i] = CRGB((153+i),(255-i),(51+i));
+    leds[5+i] = CRGB((153+i),(255-i),(51+i));
+    leds[10+i] = CRGB((153+i),(255-i),(51+i));
+    leds[15+i] = CRGB((153+i),(255-i),(51+i));
+    leds[15+i] = CRGB((153+i),(255-i),(51+i));
+    FastLED.show();
+    // clear our current dot before we move on
+    leds[i] = CRGB::Black;
+    leds[5+i] = CRGB::Black;
+    leds[10+i] = CRGB::Black;
+    leds[15+i] = CRGB::Black;
+    leds[15+i] = CRGB::Black;
+    delay(1000);
+    }
+  }
+
+  // for DisoWave()we will be using the same method as the other two with a while loop instead.
+  void DiscoWave2(){
+    
+    int i = 0;
+    int p = 153;
+    int j = 255;
+    int q = 51;
+
+    
+    //this while loop will change the color per iteration.
+    while (i < 60){
+      
+      p = p + i;
+      j = j - i;
+      q = q + i;
+       
+    //using the for loop to light up and turn of all 60 led lights.
+      for(int t = 0; t < 60; t++) {
+      // set each light to the smame pattern
+        leds[t] = CRGB(p,j,q);
+      } 
+      FastLED.show();
+      //this for loop will turn all the lights off.
+       for(int t = 0; t < 60; t++) {
+      // set each light to the smame pattern
+        leds[t] = CRGB::Black;
+      }  
+      i++;
+      delay(1000);
+    }
+  } 
+// --------------------------------------------------------------------------------------------
+ 
+  
+
 void WaveCycle(){
  wave_strip.fill(first_ten, 0, 4);
  wave_strip.show();
