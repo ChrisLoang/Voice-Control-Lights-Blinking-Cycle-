@@ -24,7 +24,6 @@
 // include the library code:
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
-#include <Adafruit_NeoPixel.h>
 #include <FastLED.h>
 
 // initialize any needed LCD interface pin, bluethooth module pin, button switch, and LED. 
