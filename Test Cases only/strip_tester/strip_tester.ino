@@ -77,14 +77,24 @@ void loop() {
 }
 
 //Strip activiation functions:
+//In the even we decide to use only the RGB 60 LED lights we must use these three functions.
 //Spliting the RGB 60 LED lights into two groups.
-// code is part of Mark Kriegsman Multiple controller examples found 
-// in the FastLed library made by Daniel Garcia. 
+// code is part of Mark Kriegsman Multiple controller examples. 
 
 //the Mirroring method has been used in both the WaveCycle2() and CircularWave2().
-//This function will test the first 30 neopixal lights in a wave pattern.
-void WaveCycle(){
+//second attempts
+void WaveCycle2(){
+  //this for loop will head from left to right.
   for(int i = 0; i < 30; i++) {
+    // set our current dot to red
+    leds[i] = CRGB((153+i),(255-i),(51+i));
+    FastLED.show();
+    // clear our current dot before we move on
+    leds[i] = CRGB::Black;
+    delay(1000);
+  }
+  //this for loop will head from right to left.
+  for(int i = 29; i > -1; i++) {
     // set our current dot to red
     leds[i] = CRGB((153+i),(255-i),(51+i));
     FastLED.show();
@@ -94,37 +104,52 @@ void WaveCycle(){
   }
 }
 
-  //This function will assist to test the  last 30 neopixal lights
-  //in a circular pattern. 
-  void CircularWave(){
-    //This for loop will help in turning on 5 lights at one time.
-    //look closely at leds because it increase from 5. This means
-    //every fifth light will be the same color. 
+  //second attempts of the Circular wave 
+  void CircularWave2(){
+    //this will start from led 31 and end at led 60.
     for(int i = 30; i < 60; i = i + 5) {
     // set our current dot to red
     leds[i] = CRGB((153+i),(255-i),(51+i));
     leds[5+i] = CRGB((153+i),(255-i),(51+i));
     leds[10+i] = CRGB((153+i),(255-i),(51+i));
     leds[15+i] = CRGB((153+i),(255-i),(51+i));
-    leds[15+i] = CRGB((153+i),(255-i),(51+i));
+    leds[20+i] = CRGB((153+i),(255-i),(51+i));
     FastLED.show();
     // clear our current dot before we move on
     leds[i] = CRGB::Black;
     leds[5+i] = CRGB::Black;
     leds[10+i] = CRGB::Black;
     leds[15+i] = CRGB::Black;
-    leds[15+i] = CRGB::Black;
-    delay(1000);//one second delay
+    leds[20+i] = CRGB::Black;
+    delay(1000);
+    }
+
+    //this will start from led 31 and end at led 60.
+    for(int i = 59; i >29; i = i - 5) {
+    // set a group of 5 current leds to a random color. 
+    leds[i] = CRGB((153+i),(255-i),(51+i));
+    leds[i-5] = CRGB((153+i),(255-i),(51+i));
+    leds[i-10] = CRGB((153+i),(255-i),(51+i));
+    leds[i-15] = CRGB((153+i),(255-i),(51+i));
+    leds[i-20] = CRGB((153+i),(255-i),(51+i));
+    FastLED.show();
+    // clear our current leds before we move on
+    leds[i] = CRGB::Black;
+    leds[i-5] = CRGB::Black;
+    leds[i-10] = CRGB::Black;
+    leds[i-15] = CRGB::Black;
+    leds[i-20] = CRGB::Black;
+    delay(1000);
     }
   }
 
-  // for DisoWave()we will be using the same method as the other two with an added  while loop instead.
-  void DiscoWave(){
+  // for DisoWave()we will be using the same method as the other two with a while loop instead.
+  void DiscoWave2(){
     
-    int i = 0; // the changer of lights 
-    int p = 153; // holds the Green positions.
-    int j = 255; // holds the Red postions.
-    int q = 51; // holds the Blue postion 
+    int i = 0;
+    int p = 153;
+    int j = 255;
+    int q = 51;
 
     
     //this while loop will change the color per iteration.
@@ -146,7 +171,7 @@ void WaveCycle(){
         leds[t] = CRGB::Black;
       }  
       i++;
-      delay(1000);//delay for a second 
+      delay(1000);
     }
   } 
 // --------------------------------------------------------------------------------------------
