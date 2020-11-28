@@ -305,7 +305,17 @@ String move_left(String personal){
 //the Mirroring method has been used in both the WaveCycle2() and CircularWave2().
 //second attempts
 void WaveCycle2(){
+  //this for loop will head from left to right.
   for(int i = 0; i < 30; i++) {
+    // set our current dot to red
+    leds[i] = CRGB((153+i),(255-i),(51+i));
+    FastLED.show();
+    // clear our current dot before we move on
+    leds[i] = CRGB::Black;
+    delay(1000);
+  }
+  //this for loop will head from right to left.
+  for(int i = 29; i > -1; i++) {
     // set our current dot to red
     leds[i] = CRGB((153+i),(255-i),(51+i));
     FastLED.show();
@@ -317,20 +327,39 @@ void WaveCycle2(){
 
   //second attempts of the Circular wave 
   void CircularWave2(){
+    //this will start from led 31 and end at led 60.
     for(int i = 30; i < 60; i = i + 5) {
     // set our current dot to red
     leds[i] = CRGB((153+i),(255-i),(51+i));
     leds[5+i] = CRGB((153+i),(255-i),(51+i));
     leds[10+i] = CRGB((153+i),(255-i),(51+i));
     leds[15+i] = CRGB((153+i),(255-i),(51+i));
-    leds[15+i] = CRGB((153+i),(255-i),(51+i));
+    leds[20+i] = CRGB((153+i),(255-i),(51+i));
     FastLED.show();
     // clear our current dot before we move on
     leds[i] = CRGB::Black;
     leds[5+i] = CRGB::Black;
     leds[10+i] = CRGB::Black;
     leds[15+i] = CRGB::Black;
-    leds[15+i] = CRGB::Black;
+    leds[20+i] = CRGB::Black;
+    delay(1000);
+    }
+
+    //this will start from led 31 and end at led 60.
+    for(int i = 59; i >29; i = i - 5) {
+    // set a group of 5 current leds to a random color. 
+    leds[i] = CRGB((153+i),(255-i),(51+i));
+    leds[i-5] = CRGB((153+i),(255-i),(51+i));
+    leds[i-10] = CRGB((153+i),(255-i),(51+i));
+    leds[i-15] = CRGB((153+i),(255-i),(51+i));
+    leds[i-20] = CRGB((153+i),(255-i),(51+i));
+    FastLED.show();
+    // clear our current leds before we move on
+    leds[i] = CRGB::Black;
+    leds[i-5] = CRGB::Black;
+    leds[i-10] = CRGB::Black;
+    leds[i-15] = CRGB::Black;
+    leds[i-20] = CRGB::Black;
     delay(1000);
     }
   }
