@@ -228,13 +228,11 @@ void ReceivingVocieFromPhone(String voice_recoded){
   //this will turn on the wave pattern on. 
   if (store_voice_string == "*turn on wave"){
     WaveCycle();
-    WaveCycle2();
     ba1 = " Wave pattern!";
   }
   //this will turn on the circular pattern on.
     else if(store_voice_string == "*turn on circular"){
     CircularWave();
-    CircularWave2();
     ba1 = " Circular pattern!";
   }
   //this will activate the disco pattern.
