@@ -298,88 +298,176 @@ String move_left(String personal){
 //----------------------------------------------------------------------------------------------------------------------------
 
 //Strip activiation functions:
-//In the even we decide to use only the RGB 60 LED lights we must use these three functions.
-//Spliting the RGB 60 LED lights into two groups.
-// code is part of Mark Kriegsman Multiple controller examples. 
 
+//Spliting the RGB 60 LED lights into two groups.
+// code is part of Mark Kriegsman Multiple controller examples found 
+// in the FastLed library made by Daniel Garcia. 
 //the Mirroring method has been used in both the WaveCycle2() and CircularWave2().
-//second attempts
-void WaveCycle2(){
-  //this for loop will head from left to right.
-  for(int i = 0; i < 30; i++) {
-    // set our current dot to red
-    leds[i] = CRGB((153+i),(255-i),(51+i));
-    FastLED.show();
-    // clear our current dot before we move on
-    leds[i] = CRGB::Black;
-    delay(1000);
-  }
-  //this for loop will head from right to left.
-  for(int i = 29; i > -1; i++) {
-    // set our current dot to red
-    leds[i] = CRGB((153+i),(255-i),(51+i));
-    FastLED.show();
-    // clear our current dot before we move on
-    leds[i] = CRGB::Black;
-    delay(1000);
+
+//This function will test the first 30 neopixal lights in a wave pattern.
+void WaveCycle(){
+
+  int j = 153;//Alters Green
+  int p = 255;//Alters Red
+  int q = 51;// Alter Blue
+  int i = 0; //Random color selection
+
+  
+  //This while loop will help in altering the color per each led light on the strip.  
+  while(i < 254){
+      p = p + i;
+      j = j - i;
+      q = q + i;
+      
+      //testing each variable to make sure they are not out of bounce.If they are we will rest them to default.
+      if (i > 254){
+        i = 0;
+        } 
+      if (j < 0 ){
+        j = 255;
+        }
+     if (q > 254){
+        q = 0;
+       }
+    if (p > 254){
+        p = 0;
+        }
+    
+    //this for loop is foward.
+    for(int t = 0; t < 30; t++) {
+     // setting up our current led light
+      i++;
+      p = p + i;
+      j = j - i;
+      q = q + i;
+      
+      leds[t] = CRGB((p),(j),(q));
+      FastLED.show();
+      // clear our current dot before we move on
+      leds[t] = CRGB::Black;
+      delay(1000);
+    }
+    
+    //this for loop is to go backward. 
+      for(int t = 29; t > -1; t = t - 1) {
+      // setting our current led light.         
+      i++;
+      p = p + i;
+      j = j - i;
+      q = q + i;
+      
+      leds[t] = CRGB((p),(j),(q));
+      FastLED.show();
+      // clear our current dot before we move on
+      leds[t] = CRGB::Black;
+      delay(1000);
+    }
+      
   }
 }
 
-  //second attempts of the Circular wave 
-  void CircularWave2(){
-    //this will start from led 31 and end at led 60.
-    for(int i = 30; i < 60; i = i + 5) {
-    // set our current dot to red
-    leds[i] = CRGB((153+i),(255-i),(51+i));
-    leds[5+i] = CRGB((153+i),(255-i),(51+i));
-    leds[10+i] = CRGB((153+i),(255-i),(51+i));
-    leds[15+i] = CRGB((153+i),(255-i),(51+i));
-    leds[20+i] = CRGB((153+i),(255-i),(51+i));
-    FastLED.show();
-    // clear our current dot before we move on
-    leds[i] = CRGB::Black;
-    leds[5+i] = CRGB::Black;
-    leds[10+i] = CRGB::Black;
-    leds[15+i] = CRGB::Black;
-    leds[20+i] = CRGB::Black;
-    delay(1000);
-    }
+  //This function will assist to test the  last 30 neopixal lights
+  //The two  for loops will help in turning on 5 lights at one time.
+  //Look closely at leds because it increase/decrease from 5. 
+  //This means every fifth light will be the same color.
+  //in a circular pattern. 
+  void CircularWave(){
+  int j = 153;//Alters Green
+  int p = 255;//Alters Red
+  int q = 51;// Alter Blue
+  int i = 0; //Random color selection
 
-    //this will start from led 31 and end at led 60.
-    for(int i = 59; i >29; i = i - 5) {
-    // set a group of 5 current leds to a random color. 
-    leds[i] = CRGB((153+i),(255-i),(51+i));
-    leds[i-5] = CRGB((153+i),(255-i),(51+i));
-    leds[i-10] = CRGB((153+i),(255-i),(51+i));
-    leds[i-15] = CRGB((153+i),(255-i),(51+i));
-    leds[i-20] = CRGB((153+i),(255-i),(51+i));
-    FastLED.show();
-    // clear our current leds before we move on
-    leds[i] = CRGB::Black;
-    leds[i-5] = CRGB::Black;
-    leds[i-10] = CRGB::Black;
-    leds[i-15] = CRGB::Black;
-    leds[i-20] = CRGB::Black;
-    delay(1000);
+  
+  //This while loop will help in altering the color per each led light on the strip.  
+  while(i < 254){
+      p = p + i;
+      j = j - i;
+      q = q + i;
+      
+      //testing each variable to make sure they are not out of bounce.If they are we will rest them to default.
+      if (i > 254){
+        i = 0;
+        } 
+      if (j < 0 ){
+        j = 255;
+        }
+     if (q > 254){
+        q = 0;
+       }
+    if (p > 254){
+        p = 0;
+        }
+    
+    //this for loop is foward.
+    for(int t = 30; t < 60; t++) {
+     // setting up our current led light
+      i++;
+      p = p + i;
+      j = j - i;
+      q = q + i;  
+      leds[t] = CRGB((p),(j),(q));
+      FastLED.show();
+      delay(100);
     }
+    //this for loop is foward.
+    for(int t = 30; t < 60; t++) {
+     // setting up our current led light
+      leds[t] = CRGB::Black;
+      FastLED.show();
+      
+    }
+    
+    //this for loop is to go backward. 
+      for(int t = 59; t > 29; t = t - 1) {
+      // setting our current led light.         
+      i++;
+      p = p + i;
+      j = j - i;
+      q = q + i;
+      
+      leds[t] = CRGB((p),(j),(q));
+      FastLED.show();
+      delay(100);
+    }
+    //this for loop is backwards.
+    for(int t = 59; t > 29; t = t-1) {
+     // setting up our current led light
+      leds[t] = CRGB::Black;
+      FastLED.show();
+      
+    } 
+  }
   }
 
-  // for DisoWave()we will be using the same method as the other two with a while loop instead.
-  void DiscoWave2(){
+  // for DisoWave()we will be using the same method as the other two with an added  while loop instead.
+  void DiscoWave(){
     
-    int i = 0;
-    int p = 153;
-    int j = 255;
-    int q = 51;
+    int i = 0; // the changer of lights 
+    int p = 153; // holds the Green positions.
+    int j = 255; // holds the Red postions.
+    int q = 51; // holds the Blue postion 
 
     
     //this while loop will change the color per iteration.
-    while (i < 60){
+    while (i < 255){
       
       p = p + i;
       j = j - i;
       q = q + i;
-       
+      //testing each variable to make sure they are not out of bounce.If they are we will rest them to default.
+      if (i > 254){
+        i = 0;
+        } 
+      if (j < 0 ){
+        j = 255;
+        }
+     if (q > 254){
+        q = 0;
+       }
+    if (p > 254){
+        p = 0;
+        }
+      
     //using the for loop to light up and turn of all 60 led lights.
       for(int t = 0; t < 60; t++) {
       // set each light to the smame pattern
@@ -392,111 +480,7 @@ void WaveCycle2(){
         leds[t] = CRGB::Black;
       }  
       i++;
-      delay(1000);
+      delay(1000);//delay for a second 
     }
   } 
 // --------------------------------------------------------------------------------------------
- 
-  
-
-void WaveCycle(){
- wave_strip.fill(first_ten, 0, 4);
- wave_strip.show();
- wave_strip.fill(second_ten, 5, 9);
- wave_strip.show();
- wave_strip.fill(third_ten, 10, 14);
- wave_strip.show();
- wave_strip.fill(fourth_ten, 15, 19);
- wave_strip.show();
- wave_strip.fill(fifth_ten, 20, 24);
- wave_strip.show();
- wave_strip.fill(six_ten, 25, 29);
- wave_strip.show();
- wave_strip.fill(fifth_ten, 20, 24);
- wave_strip.show();
- wave_strip.fill(fourth_ten, 15, 19);
- wave_strip.show();
- wave_strip.fill(third_ten, 10, 14);
- wave_strip.show();
- wave_strip.fill(second_ten, 5, 9);
- wave_strip.show();
- wave_strip.fill(first_ten, 0, 4);
- wave_strip.show();
-
-}
-
-// RGB 30 LED lights second group  
-void CircularWave(){
- wave_strip.fill(seven_ten, 30, 34);
- wave_strip.show();
- wave_strip.fill(eight_ten, 35, 39);
- wave_strip.show();
- wave_strip.fill(nine_ten, 40,44 );
- wave_strip.show();
- wave_strip.fill(ten_ten, 45, 49);
- wave_strip.show();
- wave_strip.fill(eleven_ten, 50, 54);
- wave_strip.show();
- wave_strip.fill(tweleve_ten, 55, 59);
- wave_strip.show();
- wave_strip.fill(eleven_ten, 50, 54);
- wave_strip.show();
- wave_strip.fill(ten_ten, 45, 49);
- wave_strip.show();
- wave_strip.fill(nine_ten, 40, 44);
- wave_strip.show();
- wave_strip.fill(eight_ten, 35, 39);
- wave_strip.show();
- wave_strip.fill(seven_ten, 30, 34);
- wave_strip.show();
-
-}
-
-//combining the RGB 60 LED strip together
- void DiscoWave(){
-  wave_strip.fill(seven_ten,30 , 34);
-  wave_strip.show();
-  wave_strip.fill(first_ten, 0, 4);
-  wave_strip.show();
-  wave_strip.fill(eight_ten, 35, 39);
-  wave_strip.show();
-  wave_strip.fill(second_ten, 5, 9);
-  wave_strip.show();
-  wave_strip.fill(nine_ten, 40, 44);
-  wave_strip.show();
-  wave_strip.fill(third_ten,10 ,14 );
-  wave_strip.show();
-  wave_strip.fill(ten_ten, 45, 49);
-  wave_strip.show();
-  wave_strip.fill(fourth_ten, 15 ,19);
-  wave_strip.show();
-  wave_strip.fill(eleven_ten,50 ,54);
-  wave_strip.show();
-  wave_strip.fill(fifth_ten, 20, 24);
-  wave_strip.show();
-  wave_strip.fill(tweleve_ten, 55, 59);
-  wave_strip.show();
-  wave_strip.fill(six_ten, 50, 59);
-  wave_strip.show();
-  wave_strip.fill(eleven_ten,50 ,54);
-  wave_strip.show();
-  wave_strip.fill(fifth_ten, 20, 24);
-  wave_strip.show();
-  wave_strip.fill(ten_ten, 45, 49);
-  wave_strip.show();
-  wave_strip.fill(fourth_ten, 15 ,19);
-  wave_strip.show();
-  wave_strip.fill(nine_ten, 40, 44);
-  wave_strip.show();
-  wave_strip.fill(third_ten,10 ,14 );
-  wave_strip.show();
-  wave_strip.fill(eight_ten, 35, 39);
-  wave_strip.show();
-  wave_strip.fill(second_ten, 5, 9);
-  wave_strip.show();
-  wave_strip.fill(seven_ten,30 , 34);
-  wave_strip.show();
-  wave_strip.fill(first_ten, 0, 4);
-  wave_strip.show();
-  
-  }
