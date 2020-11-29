@@ -108,11 +108,7 @@ void setup(){
   FastLED.addLeds<NEOPIXEL, wave_pin>(leds, wave_count);
 
   // All outputs will be set up.
-  
-  //Wave, Disco and Button switch
-  wave_strip.begin();
-  wave_strip.show();// by default all pixels are "off".
- 
+
   Serial.begin(9600);
 
   randomSeed(analogRead(0));
