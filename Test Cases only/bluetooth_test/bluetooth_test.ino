@@ -55,6 +55,7 @@ void loop() {
       if (c == '#'){break;}
       store_voice_frequency += c; // shorthand for voice = voice + c
     }
+      store_voice_frequency.toLowerCase();//makes the entire string have lower case character.
       Serial.print("Voice Frequency is: ");  
       Serial.print(store_voice_frequency);
       Serial.print('\n');
@@ -64,6 +65,7 @@ void loop() {
     if (store_voice_frequency.length() > 0) {
      Serial.print(hello_world());
      Serial.print('\n');
+     lcd.print(hello_world());
     }
     
     store_voice_frequency = "";
@@ -81,10 +83,10 @@ delay(1000);
 // The function below will only work if you use either: 
 //turn on wave
 //turn on circular
-//turn on both   
+//turn on disco  
 String hello_world(){
-  if (store_voice_frequency == "*turn on Wave"|| store_voice_frequency == "*Turn on wave" || store_voice_frequency == "*turn on wave" || store_voice_frequency == "*Turn on Wave"){return "wave on!";}
-  else if (store_voice_frequency == "*Turn on circular" || store_voice_frequency == "*turn on Circular" || store_voice_frequency == "*Turn on Circular" || store_voice_frequency == "*turn on circular"){return "circular on!";}
-  else if (store_voice_frequency == "turn on Disco" || store_voice_frequency == "turn on disco" || store_voice_frequency == "Turn on Disco" || store_voice_frequency == "Turn on Disco"){return "Disco on!";}
+  if (store_voice_frequency == "*turn on wave"){return "wave on!";}
+  else if (store_voice_frequency == "*turn on circular"){return "circular on!";}
+  else if (store_voice_frequency == "turn on disco"){return "Disco on!";}
   return "not a command try again.";
   }
