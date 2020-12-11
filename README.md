@@ -1,5 +1,6 @@
 # Voice Control Lights Blinking Cycle
 Bluetooth voice frequency to switch LED light show
+
 Abstract of your project 
 We want to display leds in different styling with mainly using voice control and to also have a button to perform this task manually. This will then inform the user of the current styles being displayed and will suggest other alternative styles. The main goal for this project is to have it perform using our voices as effectively as possible. 
 Overall Description of Project Idea 
